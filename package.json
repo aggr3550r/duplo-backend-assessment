@@ -1,0 +1,32 @@
+{
+  "name": "duplo-backend-assessment",
+  "version": "1.0.0",
+  "description": "This repository houses code built in partial fulfilment of the interview process for a midlevel backend engineer role at Duplo",
+  "main": "dist/index.js",
+  "pretest": "",
+  "pretest:coverage": "",
+  "keywords": [],
+  "author": "Victor Uche",
+  "license": "ISC",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development ts-node --files src",
+    "build": "tsc",
+    "start:dev": "yarn run build && cross-env NODE_ENV=development nodemon dist",
+    "test": "jest --forceExit --detectOpenHandles --silent",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --forceExit --detectOpenHandles --coverage --silent",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.1",
+    "fastify": "^4.25.2",
+    "pg": "^8.11.3",
+    "winston": "^3.11.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.6",
+    "cross-env": "^7.0.3",
+    "prisma": "^5.7.1"
+  }
+}
