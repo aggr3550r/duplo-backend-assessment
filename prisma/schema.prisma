@@ -24,8 +24,11 @@ model User {
 
 model Post {
   id String @id @default(uuid())
-  author User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String   @unique
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  title String
+  content String
+  description String?
+  authorId    String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   isActive Boolean @default(true)
