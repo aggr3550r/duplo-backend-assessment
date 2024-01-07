@@ -32,6 +32,13 @@ export class UserRepository implements IUserRepository<User> {
   }
 
   async update(criteria: Partial<User>, data: Partial<User>): Promise<User> {
+
+    const userExists = await this.findByCriteria(criteria);
+
+    if (!userExists) {
+      throw new Error('Could not find user.');
+    }
+
     return await this.ctx.prisma.user.update({
       where: {
         id: criteria?.id,
