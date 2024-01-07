@@ -5,7 +5,7 @@ import { PageMetaDTO } from '../../../paging/page-meta.dto';
 import { IUserRepository } from '../../../interfaces/database/IUserRepository';
 import { Prisma, User } from '@prisma/client';
 
-export class PostRepository implements IUserRepository<User> {
+export class UserRepository implements IUserRepository<User> {
   constructor(private ctx: AppContext) {}
 
   async findById(id: string): Promise<User> {
@@ -32,6 +32,13 @@ export class PostRepository implements IUserRepository<User> {
   }
 
   async update(criteria: Partial<User>, data: Partial<User>): Promise<User> {
+
+    const userExists = await this.findByCriteria(criteria);
+
+    if (!userExists) {
+      throw new Error('Could not find user.');
+    }
+
     return await this.ctx.prisma.user.update({
       where: {
         id: criteria?.id,
