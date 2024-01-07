@@ -1,3 +1,5 @@
+import { IMakeService } from './IMakeService';
+
 export interface IServiceFactory {
-  makeService(): any;
+  makeService(input: IMakeService): any;
 }

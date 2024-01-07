@@ -5,7 +5,7 @@ import { PageMetaDTO } from '../../../paging/page-meta.dto';
 import { IUserRepository } from '../../../interfaces/database/IUserRepository';
 import { Prisma, User } from '@prisma/client';
 
-export class PostRepository implements IUserRepository<User> {
+export class UserRepository implements IUserRepository<User> {
   constructor(private ctx: AppContext) {}
 
   async findById(id: string): Promise<User> {

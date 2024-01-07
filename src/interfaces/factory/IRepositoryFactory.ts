@@ -1,3 +1,5 @@
+import { IMakeRepository } from './IMakeRepository';
+
 export interface IRepositoryFactory {
-  makeRepository(): any;
+  makeRepository(input: IMakeRepository): any;
 }
