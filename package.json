@@ -1,8 +1,8 @@
 {
   "name": "duplo-backend-assessment",
   "version": "1.0.0",
-  "description": "This repository houses code built in partial fulfilment of the interview process for a midlevel backend engineer role at Duplo",
-  "main": "dist/index.js",
+  "description": "This repository houses code built in partial fulfilment of the interview process for a midlevel backend engineer role at Duplo.",
+  "main": "server.js",
   "pretest": "",
   "pretest:coverage": "",
   "keywords": [],
@@ -11,7 +11,9 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development ts-node --files src",
     "build": "tsc",
-    "start:dev": "yarn run build && cross-env NODE_ENV=development nodemon dist",
+    "migrate": "npx prisma migrate deploy",
+    "migrate:new": "npx prisma migrate dev --name",
+    "start:dev": "nodemon --exec ts-node src/server.ts",
     "test": "jest --forceExit --detectOpenHandles --silent",
     "test:watch": "jest --watch",
     "test:cov": "jest --forceExit --detectOpenHandles --coverage --silent",
@@ -27,6 +29,9 @@
   "devDependencies": {
     "@types/node": "^20.10.6",
     "cross-env": "^7.0.3",
-    "prisma": "^5.7.1"
+    "nodemon": "^3.0.2",
+    "prisma": "^5.7.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.3.3"
   }
 }

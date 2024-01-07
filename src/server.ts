@@ -1,16 +1,11 @@
-// server.ts
-
 import fastify from 'fastify';
-
-// Create a Fastify instance
 const app = fastify({ logger: true });
 
-// Define a sample route
+//TODO: Remove
 app.get('/', async (request, reply) => {
   return { hello: 'world' };
 });
 
-// Start the server
 const start = async () => {
   try {
     await app.listen(3000);
