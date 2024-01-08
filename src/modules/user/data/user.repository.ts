@@ -12,6 +12,7 @@ export class UserRepository implements IUserRepository<User> {
     const user = await this.prisma.user.findUnique({
       where: {
         id,
+        isActive: true,
       },
     });
 
@@ -47,13 +48,17 @@ export class UserRepository implements IUserRepository<User> {
   }
 
   async delete(criteria: Partial<User>): Promise<User> {
-    return await this.update({ ...criteria }, { isActive: false });
+    return await this.update(
+      { ...criteria, isActive: true },
+      { isActive: false }
+    );
   }
 
   async findByCriteria(criteria: Partial<User>): Promise<User> {
     const item = await this.prisma.user.findMany({
       where: {
         ...criteria,
+        isActive: true,
       },
     });
 

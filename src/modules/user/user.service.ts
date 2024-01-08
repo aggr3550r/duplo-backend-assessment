@@ -32,7 +32,6 @@ export class UserService implements IUserService {
       if (userExists) {
         throw new Error('User with that email already exists.');
       }
-      
       const user = await this.userRepository.create(input);
 
       return new ResponseModel(

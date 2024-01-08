@@ -11,6 +11,7 @@ export class PostRepository implements IPostRepository<Post> {
     const post = await this.prisma.post.findUnique({
       where: {
         id,
+        isActive: true,
       },
     });
 
@@ -36,8 +37,9 @@ export class PostRepository implements IPostRepository<Post> {
   async update(criteria: Partial<Post>, data: Partial<Post>): Promise<Post> {
     return await this.prisma.post.update({
       where: {
-        id: criteria?.id,
+        id: criteria.id,
         authorId: criteria?.authorId,
+        isActive: true,
       },
       data,
     });
@@ -45,7 +47,7 @@ export class PostRepository implements IPostRepository<Post> {
 
   async delete(criteria: Partial<Post>): Promise<Post> {
     return await this.update(
-      { id: criteria?.id, authorId: criteria?.authorId },
+      { id: criteria.id, authorId: criteria?.authorId },
       { isActive: false }
     );
   }
@@ -54,6 +56,7 @@ export class PostRepository implements IPostRepository<Post> {
     const item = await this.prisma.post.findMany({
       where: {
         ...criteria,
+        isActive: true,
       },
     });
 

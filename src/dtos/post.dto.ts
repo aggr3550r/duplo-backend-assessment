@@ -56,6 +56,16 @@ export class UpdatePostDTO {
 }
 
 export class FindPostByCriteriaDTO {
+  @IsNotEmpty()
+  @IsString()
+  id: string;
+
+  @IsNotEmpty()
+  @IsString()
+  authorId: string;
+}
+
+export class FilterPostByCriteriaDTO {
   @IsOptional()
   @IsString()
   id?: string;

@@ -5,7 +5,7 @@ async function postRoutes(fastify: FastifyInstance) {
   const apiVersion = '/api/v1';
 
   fastify.post(
-    `${apiVersion}/posts`,
+    `${apiVersion}/posts/:id`,
     async (request: FastifyRequest, reply: FastifyReply) => {
       await postController.createPost(request, reply);
     }

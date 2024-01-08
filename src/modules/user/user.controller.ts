@@ -30,9 +30,7 @@ export class UserController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 
@@ -47,9 +45,7 @@ export class UserController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 
@@ -59,7 +55,13 @@ export class UserController {
         PageOptionsDTO;
       const criteria: FindUserByCriteriaDTO = plainToClass(
         FindUserByCriteriaDTO,
-        { ...queryParams }
+        {
+          id: queryParams?.id,
+          firstName: queryParams?.firstName,
+          lastName: queryParams?.lastName,
+          isActive: queryParams?.isActive,
+          email: queryParams?.email,
+        } as FindUserByCriteriaDTO
       );
       const queryOptions: PageOptionsDTO = plainToClass(PageOptionsDTO, {
         ...queryParams,
@@ -76,9 +78,7 @@ export class UserController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 }

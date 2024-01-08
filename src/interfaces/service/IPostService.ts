@@ -1,5 +1,6 @@
 import {
   CreatePostDTO,
+  FilterPostByCriteriaDTO,
   FindPostByCriteriaDTO,
   PostDTO,
   UpdatePostDTO,
@@ -18,12 +19,14 @@ export interface IPostService {
     input: UpdatePostDTO
   ): Promise<ResponseModel<PostDTO>>;
 
-  deletePost(criteria: FindPostByCriteriaDTO): Promise<ResponseModel<PostDTO>>;
+  deletePost(
+    criteria: FilterPostByCriteriaDTO
+  ): Promise<ResponseModel<PostDTO>>;
 
   getPostById(id: string): Promise<ResponseModel<PostDTO>>;
 
   getAllPosts(
-    criteria: FindPostByCriteriaDTO,
+    criteria: FilterPostByCriteriaDTO,
     queryOptions: PageOptionsDTO
   ): Promise<ResponseModel<PostDTO>>;
 }
