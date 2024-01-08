@@ -8,6 +8,7 @@ import { ResponseModel } from '../../models/response.model';
 import { HttpStatus } from '../../enums/http-status.enum';
 import {
   CreatePostDTO,
+  FilterPostByCriteriaDTO,
   FindPostByCriteriaDTO,
   UpdatePostDTO,
 } from '../../dtos/post.dto';
@@ -25,6 +26,14 @@ export class PostService implements IPostService {
 
   async createPost(authorId: string, input: CreatePostDTO) {
     try {
+      const postExists = await this.postRepository.findByCriteria({
+        title: input.title,
+      });
+
+      if (postExists) {
+        throw new Error('Post with that title already exists.');
+      }
+
       const response = await this.postRepository.create(authorId, input);
 
       return new ResponseModel(
@@ -68,7 +77,7 @@ export class PostService implements IPostService {
     }
   }
 
-  async deletePost(criteria: FindPostByCriteriaDTO) {
+  async deletePost(criteria: FilterPostByCriteriaDTO) {
     try {
       const postExists = await this.postRepository.findByCriteria(criteria);
 
@@ -123,12 +132,12 @@ export class PostService implements IPostService {
     queryOptions: PageOptionsDTO
   ) {
     try {
-      const users = await this.postRepository.findAll(criteria, queryOptions);
+      const posts = await this.postRepository.findAll(criteria, queryOptions);
 
       return new ResponseModel(
         HttpStatus.OK,
         'Successfully retrieved posts.',
-        users
+        posts
       );
     } catch (error) {
       console.error('getAllPosts() error \n %o', error);

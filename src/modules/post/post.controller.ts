@@ -4,6 +4,7 @@ import { ServiceFactory } from '../../factories/service.factory';
 import { IMakeService } from '../../interfaces/factory/IMakeService';
 import {
   CreatePostDTO,
+  FilterPostByCriteriaDTO,
   FindPostByCriteriaDTO,
   UpdatePostDTO,
 } from '../../dtos/post.dto';
@@ -42,20 +43,21 @@ export class PostController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 
   async getAllPosts(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const queryParams = request.query as FindPostByCriteriaDTO &
+      const queryParams = request.query as FilterPostByCriteriaDTO &
         PageOptionsDTO;
 
-      const criteria: FindPostByCriteriaDTO = plainToClass(
-        FindPostByCriteriaDTO,
-        { ...queryParams }
+      const criteria: FilterPostByCriteriaDTO = plainToClass(
+        FilterPostByCriteriaDTO,
+        {
+          id: queryParams?.id,
+          authorId: queryParams?.authorId,
+        } as FilterPostByCriteriaDTO
       );
 
       const queryOptions: PageOptionsDTO = plainToClass(PageOptionsDTO, {
@@ -73,9 +75,7 @@ export class PostController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 
@@ -90,18 +90,16 @@ export class PostController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 
   async deletePost(request: FastifyRequest, reply: FastifyReply) {
     try {
-      const queryParams = request.query as FindPostByCriteriaDTO;
+      const queryParams = request.query as FilterPostByCriteriaDTO;
 
-      const criteria: FindPostByCriteriaDTO = plainToClass(
-        FindPostByCriteriaDTO,
+      const criteria: FilterPostByCriteriaDTO = plainToClass(
+        FilterPostByCriteriaDTO,
         { ...queryParams }
       );
 
@@ -111,9 +109,7 @@ export class PostController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      reply.code(500).send({ error });
     }
   }
 
@@ -139,9 +135,8 @@ export class PostController {
 
       reply.code(serviceResponse.statusCode).send(serviceResponse);
     } catch (error) {
-      reply
-        .code(500)
-        .send({ error: `Internal Server Error - ${error?.message}` });
+      console.error(error);
+      reply.code(500).send({ error });
     }
   }
 }
