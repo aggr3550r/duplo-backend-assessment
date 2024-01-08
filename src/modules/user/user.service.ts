@@ -88,7 +88,7 @@ export class UserService implements IUserService {
     }
   }
 
-  public async getUserByCritera(criteria: FindUserByCriteriaDTO) {
+  public async getUserByCriteria(criteria: FindUserByCriteriaDTO) {
     try {
       const user = await this.userRepository.findByCriteria(criteria);
 
@@ -128,7 +128,7 @@ export class UserService implements IUserService {
       console.error('getAllUsers() error \n %o', error);
 
       return new ResponseModel(
-        HttpStatus.BAD_REQUEST,
+        error?.status || HttpStatus.BAD_REQUEST,
         error?.message || 'An error occurred while getting user.',
         null
       );

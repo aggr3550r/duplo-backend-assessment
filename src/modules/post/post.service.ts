@@ -23,9 +23,9 @@ export class PostService implements IPostService {
     } as IMakeRepository);
   }
 
-  async createPost(input: CreatePostDTO) {
+  async createPost(authorId: string, input: CreatePostDTO) {
     try {
-      const response = await this.postRepository.create(input);
+      const response = await this.postRepository.create(authorId, input);
 
       return new ResponseModel(
         HttpStatus.CREATED,
@@ -131,11 +131,11 @@ export class PostService implements IPostService {
         users
       );
     } catch (error) {
-      console.error('getPostById() error \n %o', error);
+      console.error('getAllPosts() error \n %o', error);
 
       return new ResponseModel(
         HttpStatus.BAD_REQUEST,
-        error?.message || 'An error occurred while retrieving post.',
+        error?.message || 'An error occurred while retrieving all posts.',
         null
       );
     }
