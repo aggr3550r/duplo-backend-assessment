@@ -5,7 +5,6 @@ import 'reflect-metadata';
 
 import postRoutes from './routes/post.routes';
 import userRoutes from './routes/user.routes';
-import { configService } from './config/config.service';
 
 const app = Fastify({ logger: true });
 
