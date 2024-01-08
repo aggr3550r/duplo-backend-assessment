@@ -25,6 +25,14 @@ export class UserService implements IUserService {
 
   public async createUser(input: CreateUserDTO) {
     try {
+      const userExists = await this.userRepository.findByCriteria({
+        email: input?.email,
+      });
+
+      if (userExists) {
+        throw new Error('User with that email already exists.');
+      }
+      
       const user = await this.userRepository.create(input);
 
       return new ResponseModel(

@@ -1,10 +1,8 @@
-import { AppContext } from '../../../types';
 import { PageDTO } from '../../../paging/page.dto';
 import { PageOptionsDTO } from '../../../paging/page-option.dto';
 import { PageMetaDTO } from '../../../paging/page-meta.dto';
 import { IUserRepository } from '../../../interfaces/database/IUserRepository';
-import { Prisma, PrismaClient, User } from '@prisma/client';
-import { CONTEXT } from '../../../server';
+import { PrismaClient, User } from '@prisma/client';
 import { CreateUserDTO } from '../../../dtos/user.dto';
 
 export class UserRepository implements IUserRepository<User> {
