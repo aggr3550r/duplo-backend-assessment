@@ -9,7 +9,7 @@
   "author": "Victor Uche",
   "license": "ISC",
   "scripts": {
-    "start": "node dist/src/index.js",
+    "start": "node dist/server.js",
     "build": "tsc",
     "migrate": "npx prisma migrate deploy",
     "migrate:new": "npx prisma migrate dev --name",
