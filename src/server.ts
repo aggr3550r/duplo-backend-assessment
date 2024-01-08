@@ -18,6 +18,14 @@ export const CONTEXT: AppContext = {
   prisma,
 };
 
+
+app.get('/api/v1/health', async (request, reply) => {
+  try {
+    return { status: 'ok', message: 'Server is healthy' };
+  } catch (error) {
+    reply.status(500).send({ status: 'error', message: 'Server is unhealthy' });
+  }
+});
 app.register(postRoutes);
 app.register(userRoutes);
 
