@@ -7,7 +7,7 @@ class ConfigService {
   public getValue(key: string, throwOnMissing = true): string {
     const value = this.env[key];
     if (!value && throwOnMissing) {
-      console.log('env var value missing for - ', this.env[key]);
+      console.info('env var value missing for - %s', this.env[key]);
     }
 
     return value;

@@ -4,9 +4,12 @@ import { PageOptionsDTO } from '../../../paging/page-option.dto';
 import { PageMetaDTO } from '../../../paging/page-meta.dto';
 import { IUserRepository } from '../../../interfaces/database/IUserRepository';
 import { Prisma, User } from '@prisma/client';
+import { CONTEXT } from '../../../server';
 
 export class UserRepository implements IUserRepository<User> {
-  constructor(private ctx: AppContext) {}
+  constructor(private ctx: AppContext) {
+    this.ctx = CONTEXT;
+  }
 
   async findById(id: string): Promise<User> {
     const user = await this.ctx.prisma.user.findUnique({
@@ -32,7 +35,6 @@ export class UserRepository implements IUserRepository<User> {
   }
 
   async update(criteria: Partial<User>, data: Partial<User>): Promise<User> {
-
     const userExists = await this.findByCriteria(criteria);
 
     if (!userExists) {

@@ -4,7 +4,7 @@ import { ServiceFactory } from '../../factories/service.factory';
 import { IMakeService } from '../../interfaces/factory/IMakeService';
 import { IUserService } from '../../interfaces/service/IUserService';
 import { PageOptionsDTO } from '../../paging/page-option.dto';
-import { FindUserByCriteriaDTO } from '../../dtos/user.dto';
+import { CreateUserDTO, FindUserByCriteriaDTO } from '../../dtos/user.dto';
 import { plainToClass } from 'class-transformer';
 import { validateOrReject } from 'class-validator';
 import { FindByIdDTO } from '../../dtos/common.dto';
@@ -17,6 +17,12 @@ export class UserController {
     this.userService = this.serviceFactory.makeService({
       serviceType: ServiceType.USER_SERVICE,
     } as IMakeService);
+  }
+
+  async createUser(request: FastifyRequest, reply: FastifyReply) {
+    try {
+      const body = request.body as CreateUserDTO;
+    } catch (error) {}
   }
 
   async getUserById(request: FastifyRequest, reply: FastifyReply) {

@@ -20,10 +20,6 @@ export class UserDTO extends BaseDTO {
   @IsString()
   email: string;
 
-  @IsNotEmpty()
-  @IsString()
-  password: string;
-
   @IsOptional()
   @IsArray()
   posts?: [];
@@ -41,10 +37,6 @@ export class CreateUserDTO {
   @IsNotEmpty()
   @IsString()
   email: string;
-
-  @IsNotEmpty()
-  @IsString()
-  password: string;
 }
 
 export class UpdateUserDTO {
@@ -59,10 +51,6 @@ export class UpdateUserDTO {
   @IsOptional()
   @IsString()
   email?: string;
-
-  @IsOptional()
-  @IsString()
-  password?: string;
 }
 
 export class FindUserByCriteriaDTO {

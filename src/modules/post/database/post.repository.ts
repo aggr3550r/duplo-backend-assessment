@@ -4,9 +4,12 @@ import { AppContext } from '../../../types';
 import { PageDTO } from '../../../paging/page.dto';
 import { PageOptionsDTO } from '../../../paging/page-option.dto';
 import { PageMetaDTO } from '../../../paging/page-meta.dto';
+import { CONTEXT } from '../../../server';
 
 export class PostRepository implements IPostRepository<Post> {
-  constructor(private ctx: AppContext) {}
+  constructor(private ctx: AppContext) {
+    this.ctx = CONTEXT;
+  }
 
   async findById(id: string): Promise<Post> {
     const post = await this.ctx.prisma.post.findUnique({
