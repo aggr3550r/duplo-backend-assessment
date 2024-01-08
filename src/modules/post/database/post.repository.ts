@@ -18,12 +18,12 @@ export class PostRepository implements IPostRepository<Post> {
     return post;
   }
 
-  async create(input: Partial<Post>): Promise<Post> {
+  async create(authorId: string, input: Partial<Post>): Promise<Post> {
     const post = await this.ctx.prisma.post.create({
       data: {
         author: {
           connect: {
-            id: input.authorId,
+            id: authorId,
           },
         },
         content: input.content,

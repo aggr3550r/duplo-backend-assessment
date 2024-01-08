@@ -22,10 +22,6 @@ export class PostDTO extends BaseDTO {
 export class CreatePostDTO {
   @IsNotEmpty()
   @IsString()
-  authorId: string;
-
-  @IsNotEmpty()
-  @IsString()
   title: string;
 
   @IsNotEmpty()
@@ -68,3 +64,4 @@ export class FindPostByCriteriaDTO {
   @IsString()
   authorId?: string;
 }
+

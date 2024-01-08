@@ -22,13 +22,17 @@
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
+    "@types/fastify-jwt": "^0.8.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
     "fastify": "^4.25.2",
+    "fastify-jwt": "^4.2.0",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3",
     "winston": "^3.11.0"
   },
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "^20.10.6",
     "cross-env": "^7.0.3",
     "nodemon": "^3.0.2",

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "commonjs",
     "esModuleInterop": true,
-    "target": "es2015",
+    "target": "es2016",
     "allowJs": true,
     "plugins": [
       {
@@ -15,7 +15,7 @@
     "sourceMap": true,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "typeRoots": ["node_modules/@types", "src/types"],
+    "typeRoots": ["node_modules/@types", "src/types", "node_modules/*"],
     "baseUrl": ".",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
