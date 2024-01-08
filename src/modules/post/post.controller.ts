@@ -30,11 +30,10 @@ export class PostController {
 
       const paramObj = request.params as FindByIdDTO;
 
+      await validateOrReject(input);
       await validateOrReject(paramObj);
 
       const { id: authorId } = paramObj;
-
-      await validateOrReject(input);
 
       const serviceResponse = await this.postService.createPost(
         authorId,
