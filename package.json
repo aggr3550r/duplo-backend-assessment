@@ -30,6 +30,7 @@
     "fastify-jwt": "^4.2.0",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.3",
+    "reflect-metadata": "^0.2.1",
     "winston": "^3.11.0"
   },
   "devDependencies": {

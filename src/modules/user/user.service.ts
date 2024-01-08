@@ -27,8 +27,6 @@ export class UserService implements IUserService {
     try {
       const user = await this.userRepository.create(input);
 
-      user.password = undefined;
-
       return new ResponseModel(
         HttpStatus.CREATED,
         'Successfully created user.',

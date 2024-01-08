@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { userController } from '../container';
 
 async function userRoutes(fastify: FastifyInstance) {
-  const apiVersion = '/v1';
+  const apiVersion = '/api/v1';
 
   fastify.post(
     `${apiVersion}/users`,
