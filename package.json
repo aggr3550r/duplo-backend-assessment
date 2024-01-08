@@ -25,6 +25,7 @@
     "@types/fastify-jwt": "^0.8.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
+    "dotenv": "^16.3.1",
     "fastify": "^4.25.2",
     "fastify-jwt": "^4.2.0",
     "jsonwebtoken": "^9.0.2",

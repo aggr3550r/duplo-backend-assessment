@@ -23,12 +23,16 @@ export class PostController {
     } as IMakeService);
   }
 
-  //TODO: Enforce validation
   async createPost(request: FastifyRequest, reply: FastifyReply) {
     try {
       const body = request.body as CreatePostDTO;
-      const authorId = '';
       const input = plainToClass(CreatePostDTO, body);
+
+      const paramObj = request.params as FindByIdDTO;
+
+      await validateOrReject(paramObj);
+
+      const { id: authorId } = paramObj;
 
       await validateOrReject(input);
 

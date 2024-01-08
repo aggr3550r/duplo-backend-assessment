@@ -1,19 +1,20 @@
 import Fastify from 'fastify';
-import { configService } from './config/config.service';
+import { PrismaClient } from '@prisma/client';
+import { AppContext } from './types';
+import postRoutes from './routes/post.routes';
+import userRoutes from './routes/user.routes';
 
 const app = Fastify({ logger: true });
 
-//TODO: Remove
-app.get('/', async (request, reply) => {
-  return { hello: 'world' };
-});
+const prisma = new PrismaClient();
 
-const fastify = Fastify();
+export const CONTEXT: AppContext = {
+  prisma,
+};
 
-// Register fastify-jwt with your secret key
-fastify.register(require('fastify-jwt'), {
-  secret: configService.getValue('JWT_SECRET'),
-});
+app.register(postRoutes);
+app.register(userRoutes);
+
 
 const start = async () => {
   try {
