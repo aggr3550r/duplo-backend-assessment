@@ -22,7 +22,18 @@ export class UserController {
   async createUser(request: FastifyRequest, reply: FastifyReply) {
     try {
       const body = request.body as CreateUserDTO;
-    } catch (error) {}
+      const input = plainToClass(CreateUserDTO, body);
+
+      await validateOrReject(input);
+
+      const serviceResponse = await this.userService.createUser(input);
+
+      reply.code(serviceResponse.statusCode).send(serviceResponse);
+    } catch (error) {
+      reply
+        .code(500)
+        .send({ error: `Internal Server Error - ${error?.message}` });
+    }
   }
 
   async getUserById(request: FastifyRequest, reply: FastifyReply) {

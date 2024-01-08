@@ -9,11 +9,13 @@ import { CONTEXT } from '../server';
 import { ServiceFactory } from '../factories/service.factory';
 import { PostController } from '../modules/post/post.controller';
 import { ServiceType } from '../enums/service-type.enum';
+import { PrismaClient } from '@prisma/client';
 
-const ctx: AppContext = CONTEXT;
+const prisma = new PrismaClient();
 
-const postRepository = new PostRepository(ctx);
-const userRepository = new UserRepository(ctx);
+
+const postRepository = new PostRepository(prisma);
+const userRepository = new UserRepository(prisma);
 
 const repositoryFactory = new RepositoryFactory(userRepository, postRepository);
 

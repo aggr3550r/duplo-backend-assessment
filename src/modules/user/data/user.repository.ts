@@ -3,16 +3,15 @@ import { PageDTO } from '../../../paging/page.dto';
 import { PageOptionsDTO } from '../../../paging/page-option.dto';
 import { PageMetaDTO } from '../../../paging/page-meta.dto';
 import { IUserRepository } from '../../../interfaces/database/IUserRepository';
-import { Prisma, User } from '@prisma/client';
+import { Prisma, PrismaClient, User } from '@prisma/client';
 import { CONTEXT } from '../../../server';
+import { CreateUserDTO } from '../../../dtos/user.dto';
 
 export class UserRepository implements IUserRepository<User> {
-  constructor(private ctx: AppContext) {
-    this.ctx = CONTEXT;
-  }
+  constructor(private readonly prisma: PrismaClient) {}
 
   async findById(id: string): Promise<User> {
-    const user = await this.ctx.prisma.user.findUnique({
+    const user = await this.prisma.user.findUnique({
       where: {
         id,
       },
@@ -21,13 +20,12 @@ export class UserRepository implements IUserRepository<User> {
     return user;
   }
 
-  async create(input: Prisma.UserCreateInput): Promise<User> {
-    const user = await this.ctx.prisma.user.create({
+  async create(input: CreateUserDTO): Promise<User> {
+    const user = await this.prisma.user.create({
       data: {
         email: input.email,
         firstName: input.firstName,
         lastName: input.lastName,
-        password: input.password,
       },
     });
 
@@ -41,7 +39,7 @@ export class UserRepository implements IUserRepository<User> {
       throw new Error('Could not find user.');
     }
 
-    return await this.ctx.prisma.user.update({
+    return await this.prisma.user.update({
       where: {
         id: criteria?.id,
         ...criteria,
@@ -55,7 +53,7 @@ export class UserRepository implements IUserRepository<User> {
   }
 
   async findByCriteria(criteria: Partial<User>): Promise<User> {
-    const item = await this.ctx.prisma.user.findMany({
+    const item = await this.prisma.user.findMany({
       where: {
         ...criteria,
       },
@@ -68,7 +66,7 @@ export class UserRepository implements IUserRepository<User> {
     criteria: Partial<User>,
     queryOptions: PageOptionsDTO
   ): Promise<PageDTO<User>> {
-    const users: User[] = await this.ctx.prisma.user.findMany({
+    const users: User[] = await this.prisma.user.findMany({
       where: {
         ...criteria,
         isActive: true,

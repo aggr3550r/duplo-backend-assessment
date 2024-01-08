@@ -1,18 +1,14 @@
-import { Post } from '@prisma/client';
+import { Post, PrismaClient } from '@prisma/client';
 import { IPostRepository } from '../../../interfaces/database/IPostRepository';
-import { AppContext } from '../../../types';
 import { PageDTO } from '../../../paging/page.dto';
 import { PageOptionsDTO } from '../../../paging/page-option.dto';
 import { PageMetaDTO } from '../../../paging/page-meta.dto';
-import { CONTEXT } from '../../../server';
 
 export class PostRepository implements IPostRepository<Post> {
-  constructor(private ctx: AppContext) {
-    this.ctx = CONTEXT;
-  }
+  constructor(private readonly prisma: PrismaClient) {}
 
   async findById(id: string): Promise<Post> {
-    const post = await this.ctx.prisma.post.findUnique({
+    const post = await this.prisma.post.findUnique({
       where: {
         id,
       },
@@ -22,7 +18,7 @@ export class PostRepository implements IPostRepository<Post> {
   }
 
   async create(authorId: string, input: Partial<Post>): Promise<Post> {
-    const post = await this.ctx.prisma.post.create({
+    const post = await this.prisma.post.create({
       data: {
         author: {
           connect: {
@@ -38,7 +34,7 @@ export class PostRepository implements IPostRepository<Post> {
     return post;
   }
   async update(criteria: Partial<Post>, data: Partial<Post>): Promise<Post> {
-    return await this.ctx.prisma.post.update({
+    return await this.prisma.post.update({
       where: {
         id: criteria?.id,
         authorId: criteria?.authorId,
@@ -55,7 +51,7 @@ export class PostRepository implements IPostRepository<Post> {
   }
 
   async findByCriteria(criteria: Partial<Post>): Promise<Post> {
-    const item = await this.ctx.prisma.post.findMany({
+    const item = await this.prisma.post.findMany({
       where: {
         ...criteria,
       },
@@ -68,7 +64,7 @@ export class PostRepository implements IPostRepository<Post> {
     criteria: Partial<Post>,
     queryOptions: PageOptionsDTO
   ): Promise<PageDTO<Post>> {
-    const posts: Post[] = await this.ctx.prisma.post.findMany({
+    const posts: Post[] = await this.prisma.post.findMany({
       where: {
         authorId: criteria?.authorId,
         ...criteria,

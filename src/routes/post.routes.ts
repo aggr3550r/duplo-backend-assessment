@@ -2,7 +2,7 @@ import { FastifyInstance, FastifyRequest, FastifyReply } from 'fastify';
 import { postController } from '../container';
 
 async function postRoutes(fastify: FastifyInstance) {
-  const apiVersion = '/v1';
+  const apiVersion = '/api/v1';
 
   fastify.post(
     `${apiVersion}/posts`,

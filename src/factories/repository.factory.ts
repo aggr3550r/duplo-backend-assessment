@@ -23,9 +23,10 @@ export class RepositoryFactory implements IRepositoryFactory {
 
       case RepositoryType.POST:
         repository = this.postRepository;
+        break;
 
       default:
-        throw new Error('Could not find repsitory.');
+        throw new Error('Could not find repository.');
         break;
     }
 
