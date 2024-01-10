@@ -24,7 +24,7 @@ export class PostService implements IPostService {
     } as IMakeRepository);
   }
 
-  async createPost(authorId: string, input: CreatePostDTO) {
+  public async createPost(authorId: string, input: CreatePostDTO) {
     try {
       const postExists = await this.postRepository.findByCriteria({
         title: input.title,
@@ -52,7 +52,10 @@ export class PostService implements IPostService {
     }
   }
 
-  async updatePost(criteria: FindPostByCriteriaDTO, input: UpdatePostDTO) {
+  public async updatePost(
+    criteria: FindPostByCriteriaDTO,
+    input: UpdatePostDTO
+  ) {
     try {
       const postExists = await this.postRepository.findByCriteria(criteria);
 
@@ -77,7 +80,7 @@ export class PostService implements IPostService {
     }
   }
 
-  async deletePost(criteria: FilterPostByCriteriaDTO) {
+  public async deletePost(criteria: FilterPostByCriteriaDTO) {
     try {
       const postExists = await this.postRepository.findByCriteria(criteria);
 
@@ -103,7 +106,7 @@ export class PostService implements IPostService {
     }
   }
 
-  async getPostById(id: string) {
+  public async getPostById(id: string) {
     try {
       const postExists = await this.postRepository.findById(id);
 
@@ -144,7 +147,7 @@ export class PostService implements IPostService {
 
       return new ResponseModel(
         HttpStatus.BAD_REQUEST,
-        error?.message || 'An error occurred while retrieving all posts.',
+        'An error occurred while retrieving all posts.',
         null
       );
     }
