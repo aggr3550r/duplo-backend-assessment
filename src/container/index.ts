@@ -5,7 +5,6 @@ import { UserService } from '../modules/user/user.service';
 import { RepositoryFactory } from '../factories/repository.factory';
 import { PostService } from '../modules/post/post.service';
 import { UserController } from '../modules/user/user.controller';
-import { CONTEXT } from '../server';
 import { ServiceFactory } from '../factories/service.factory';
 import { PostController } from '../modules/post/post.controller';
 import { ServiceType } from '../enums/service-type.enum';

@@ -32,8 +32,6 @@ class ConfigService {
     return mode == 'development' || mode == 'dev' || mode == 'develop';
   }
 }
-const configService = new ConfigService(process.env).ensureValues([
-  'JWT_SECRET',
-]);
+const configService = new ConfigService(process.env);
 
 export { configService };

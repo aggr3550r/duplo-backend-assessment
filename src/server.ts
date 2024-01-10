@@ -1,21 +1,10 @@
 import Fastify from 'fastify';
-import { PrismaClient } from '@prisma/client';
-import { AppContext } from './types';
 import 'reflect-metadata';
 
 import postRoutes from './routes/post.routes';
 import userRoutes from './routes/user.routes';
-import { configService } from './config/config.service';
 
 const app = Fastify({ logger: true });
-
-const prisma = new PrismaClient();
-
-app.decorate('prisma', prisma);
-
-export const CONTEXT: AppContext = {
-  prisma,
-};
 
 app.get('/api/v1/health', async (request, reply) => {
   try {
