@@ -4,7 +4,6 @@ import http from 'http';
 
 import postRoutes from './routes/post.routes';
 import userRoutes from './routes/user.routes';
-import { configService } from './config/config.service';
 
 const app = Fastify({ logger: true });
 
@@ -18,7 +17,7 @@ app.get('/api/v1/health', async (request, reply) => {
 app.register(postRoutes);
 app.register(userRoutes);
 
-const PORT = 8000;
+const PORT = 3000;
 
 const start = async () => {
   try {
