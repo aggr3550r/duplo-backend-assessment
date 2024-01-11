@@ -18,11 +18,11 @@ app.get('/api/v1/health', async (request, reply) => {
 app.register(postRoutes);
 app.register(userRoutes);
 
-const PORT = configService.getPort() || 8000;
+const PORT = 8000;
 
 const start = async () => {
   try {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.info(`HTTP Server started on port ${PORT}`);
     });
   } catch (err) {
