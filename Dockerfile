@@ -14,6 +14,6 @@ RUN npx prisma generate
 
 RUN yarn build
 
-EXPOSE 80
+EXPOSE 8000
 
 ENTRYPOINT ["yarn", "start"]
